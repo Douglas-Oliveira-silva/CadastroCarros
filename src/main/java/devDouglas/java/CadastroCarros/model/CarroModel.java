@@ -30,7 +30,7 @@ public class CarroModel {
    @Column(name="ano")
    private int ano;
 
-   @Column(name="coe")
+   @Column(name="cor")
    private String cor;
 
    @Column(unique = true)
