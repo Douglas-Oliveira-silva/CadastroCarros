@@ -4,6 +4,7 @@ package devDouglas.java.CadastroCarros.controller;
 import devDouglas.java.CadastroCarros.dto.CarroDTO;
 import devDouglas.java.CadastroCarros.service.CarroService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -57,10 +58,44 @@ public class CarroController {
     }
 
     // LISTAR POR ID
+    @GetMapping("/listar/{id}")
+    @Operation(summary = "Lista o carro por Id", description = "Essa rota lista o carro pelo seu Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Carro não encontrado")
+    })
+    public ResponseEntity<?> ListarCarrosPorId(@PathVariable long id){
+        CarroDTO carro = carroService.ListarCarrosPorId(id);
 
+        if (carro != null){
+            return ResponseEntity.ok(carro);
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Carro com o ID: " + id + " Não existe nos nossos registros");
+        }
+    }
 
+    //Alterar Dados dos carro
+    @PutMapping("/alterar/{id}")
+    @Operation(summary = "Altera o carro pelo Id", description = "Essa rota altera um carro pelo seu Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro alterado com sucesso!"),
+            @ApiResponse(responseCode = "404", description = "Carro não encontrado, não foi possível alterar")
+    })
+    public ResponseEntity<?> alterarCarroPorId(
+            @Parameter(description = "Usuario manda o id no caminho da requisição")
+            @PathVariable Long id,
+            @Parameter (description = "usuário manda os dados do carro para ser atualizado no corpo da requisição")
+            @RequestBody CarroDTO carroAtualizado){
 
+        CarroDTO alterarCarro = carroService.AtualizarCarro(id, carroAtualizado);
 
+        if (alterarCarro != null){
+            return ResponseEntity.ok(alterarCarro);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carro com o Id: " + id + " não existe em nossos registros");
+        }
 
+    }
 
 }
