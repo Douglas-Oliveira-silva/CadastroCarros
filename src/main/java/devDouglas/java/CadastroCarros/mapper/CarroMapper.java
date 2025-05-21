@@ -11,7 +11,10 @@ public class CarroMapper {
 
         CarroModel carroModel = new CarroModel();
 
-        carroModel.setId(dto.getId());
+        //carroModel.setId(dto.getId());
+        if (dto.getId() != null){
+            carroModel.setId(dto.getId());
+        }
         carroModel.setModelo(dto.getModelo());
         carroModel.setMarca(dto.getMarca());
         carroModel.setAno(dto.getAno());
