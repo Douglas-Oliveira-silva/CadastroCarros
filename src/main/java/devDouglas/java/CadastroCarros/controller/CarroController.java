@@ -95,7 +95,19 @@ public class CarroController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carro com o Id: " + id + " não existe em nossos registros");
         }
+    }
 
+    // Deletar
+    
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<String> deletarCarroPorId(@PathVariable Long id){
+
+        if (carroService.ListarCarrosPorId(id) != null){
+            carroService.deletarCarroPorId(id);
+            return ResponseEntity.ok("Carro com o Id " + id + " deletado com sucesso");
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O carro com o Id " + id + " não foi encontrado!");
+        }
     }
 
 }
