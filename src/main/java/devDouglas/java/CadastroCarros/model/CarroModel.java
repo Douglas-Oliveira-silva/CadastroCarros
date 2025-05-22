@@ -44,6 +44,8 @@ public class CarroModel {
    @Pattern(regexp = "[A-Z]{3}-?\\d{4}", message = "Placa no formato inválido")
    private String placa;
 
+   private String imagemUrl;
+
 }
 
 
