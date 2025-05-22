@@ -41,7 +41,7 @@ public class CarroWebController {
 
     // 4. Mostrar formulário de edição
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEditar(PathVariable Long id, Model model){
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model){
         CarroDTO carro = carroService.ListarCarrosPorId(id);
         model.addAttribute("carro", carro);
         return "editar"; //editar.html

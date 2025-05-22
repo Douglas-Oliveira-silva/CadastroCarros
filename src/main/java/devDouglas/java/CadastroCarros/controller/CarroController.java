@@ -98,8 +98,12 @@ public class CarroController {
     }
 
     // Deletar
-    
     @DeleteMapping("/deletar/{id}")
+    @Operation(summary = "deleta o carro por Id", description = "Essa rota deleta o carro pelo seu Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Carro não encontrado")
+    })
     public ResponseEntity<String> deletarCarroPorId(@PathVariable Long id){
 
         if (carroService.ListarCarrosPorId(id) != null){
