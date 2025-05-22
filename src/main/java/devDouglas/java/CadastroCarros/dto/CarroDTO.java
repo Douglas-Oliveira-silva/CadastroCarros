@@ -15,5 +15,6 @@ public class CarroDTO {
     private int ano;
     private String cor;
     private String placa;
+    private String imagemUrl;
 
 }
