@@ -47,6 +47,20 @@ public class CarroWebController {
         return "editar"; //editar.html
     }
 
+    // 5. Processar formulário de edição
+    @PostMapping("/editar/{id}")
+    public String editarCarro(@PathVariable Long id, @ModelAttribute("carro") CarroDTO carroDTO){
+        carroService.AtualizarCarro(id, carroDTO);
+        return "redirect:/web/carros";
+    }
+
+    // 6. Deletar carro
+    @GetMapping("/deletar/{id}")
+    public String deletarCarro(@PathVariable Long id){
+        carroService.deletarCarroPorId(id);
+        return "redirect:/web/carros ";
+    }
+
 
 
 
