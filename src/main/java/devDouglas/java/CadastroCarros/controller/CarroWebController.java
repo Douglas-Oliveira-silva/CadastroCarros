@@ -18,7 +18,6 @@ public class CarroWebController {
     }
 
     // 1. listar carros
-
     @GetMapping
     public String listarCarros(Model model) {
         model.addAttribute("carros", carroService.ListarCarros());
@@ -26,7 +25,6 @@ public class CarroWebController {
     }
 
     // 2. Mostrar formulário de criação
-
     @GetMapping("/criar")
     public String mostrarFormularioCriar(Model model){
         model.addAttribute("carro", new CarroDTO());

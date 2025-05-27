@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Formulário de Carro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
+<h1 th:text="${carro.id} != null ? 'Editar Carro' : 'Cadastrar Carro'"></h1>
 
+<form th:action="@{${carro.id} != null ? '/carros/editar/' + ${carro.id} : '/carros/criar'}" method="post">
+    <div>
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" th:value="${carro.modelo}" required />
+    </div>
+
+    <div>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" th:value="${carro.marca}" required />
+    </div>
+
+    <div>
+        <label for="ano">Ano:</label>
+        <input type="number" id="ano" name="ano" th:value="${carro.ano}" required min="1900" max="2100" />
+    </div>
+
+    <div>
+        <label for="cor">Cor:</label>
+        <input type="text" id="cor" name="cor" th:value="${carro.cor}" required />
+    </div>
+
+    <div>
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" th:value="${carro.placa}" required pattern="[A-Z]{3}-\d{4}" title="Formato: ABC-1234" />
+    </div>
+
+    <div>
+        <button type="submit">Salvar</button>
+        <a th:href="@{/carros}">Cancelar</a>
+    </div>
+</form>
 </body>
 </html>
