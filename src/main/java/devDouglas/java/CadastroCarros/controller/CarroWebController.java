@@ -2,13 +2,12 @@ package devDouglas.java.CadastroCarros.controller;
 
 import devDouglas.java.CadastroCarros.dto.CarroDTO;
 import devDouglas.java.CadastroCarros.service.CarroService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-
+@Controller
+@RequestMapping("/web/carros")
 public class CarroWebController {
 
     private final CarroService carroService;
@@ -17,7 +16,7 @@ public class CarroWebController {
         this.carroService = carroService;
     }
 
-    // 1. listar carros
+    // 1. Listar carros
     @GetMapping
     public String listarCarros(Model model) {
         model.addAttribute("carros", carroService.ListarCarros());
@@ -28,12 +27,13 @@ public class CarroWebController {
     @GetMapping("/criar")
     public String mostrarFormularioCriar(Model model){
         model.addAttribute("carro", new CarroDTO());
-        return "criar"; //criar.html//
+        return "formulario"; // reutilizando formulario.html
     }
 
     // 3. Processar formulário de criação
     @PostMapping("/criar")
     public String criarCarro(@ModelAttribute("carro") CarroDTO carroDTO) {
+        carroService.criarCarro(carroDTO);  // Assumindo método de serviço para criar
         return "redirect:/web/carros";
     }
 
@@ -42,7 +42,7 @@ public class CarroWebController {
     public String mostrarFormularioEditar(@PathVariable Long id, Model model){
         CarroDTO carro = carroService.ListarCarrosPorId(id);
         model.addAttribute("carro", carro);
-        return "editar"; //editar.html
+        return "formulario"; // reutilizando formulario.html
     }
 
     // 5. Processar formulário de edição
@@ -56,11 +56,14 @@ public class CarroWebController {
     @GetMapping("/deletar/{id}")
     public String deletarCarro(@PathVariable Long id){
         carroService.deletarCarroPorId(id);
-        return "redirect:/web/carros ";
+        return "redirect:/web/carros";
     }
 
-
-
-
-
+    // 7. Detalhar carro
+    @GetMapping("/detalhe/{id}")
+    public String mostrarDetalheCarro(@PathVariable Long id, Model model) {
+        CarroDTO carro = carroService.ListarCarrosPorId(id);
+        model.addAttribute("carro", carro);
+        return "detalhe";
+    }
 }

@@ -2,20 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Detalhes do Carro</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 
-<h1>Detalhes do Carro</h1>
+<div class="container">
+    <h1>Detalhes do Carro</h1>
 
-<p><strong>ID:</strong> <span th:text="${carro.id}"></span></p>
-<p><strong>Modelo:</strong> <span th:text="${carro.modelo}"></span></p>
-<p><strong>Marca:</strong> <span th:text="${carro.marca}"></span></p>
-<p><strong>Ano:</strong> <span th:text="${carro.ano}"></span></p>
-<p><strong>Cor:</strong> <span th:text="${carro.cor}"></span></p>
-<p><strong>Placa:</strong> <span th:text="${carro.placa}"></span></p>
+    <p><strong>ID:</strong> <span th:text="${carro.id}"></span></p>
+    <p><strong>Modelo:</strong> <span th:text="${carro.modelo}"></span></p>
+    <p><strong>Marca:</strong> <span th:text="${carro.marca}"></span></p>
+    <p><strong>Ano:</strong> <span th:text="${carro.ano}"></span></p>
+    <p><strong>Cor:</strong> <span th:text="${carro.cor}"></span></p>
+    <p><strong>Placa:</strong> <span th:text="${carro.placa}"></span></p>
 
-<a th:href="@{/}">Voltar para lista</a>
+    <a th:href="@{/web/carros}" class="btn">Voltar à Lista</a>
+</div>
 
 </body>
 </html>

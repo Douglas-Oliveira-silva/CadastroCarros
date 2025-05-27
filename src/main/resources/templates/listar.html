@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Lista de Carros</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-
-<h1>Lista de Carros</h1>
-
-<a th:href="@{/carros/criar}">Adicionar Novo Carro</a>
-
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Modelo</th>
-        <th>Marca</th>
-        <th>Ano</th>
-        <th>Cor</th>
-        <th>Placa</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="carro : ${carros}">
-        <td th:text="${carro.id}"></td>
-        <td th:text="${carro.modelo}"></td>
-        <td th:text="${carro.marca}"></td>
-        <td th:text="${carro.ano}"></td>
-        <td th:text="${carro.cor}"></td>
-        <td th:text="${carro.placa}"></td>
-        <td>
-            <a th:href="@{'/carros/editar/' + ${carro.id}}">Editar</a> |
-            <a th:href="@{'/carros/deletar/' + ${carro.id}}">Excluir</a> |
-            <a th:href="@{'/carros/detalhe/' + ${carro.id}}">Detalhar</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
+<div class="container">
+    <h1>Lista de Carros</h1>
+    <a class="btn" th:href="@{/web/carros/criar}">Adicionar Novo Carro</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Cor</th>
+            <th>Placa</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="carro : ${carros}">
+            <td th:text="${carro.id}"></td>
+            <td th:text="${carro.modelo}"></td>
+            <td th:text="${carro.marca}"></td>
+            <td th:text="${carro.ano}"></td>
+            <td th:text="${carro.cor}"></td>
+            <td th:text="${carro.placa}"></td>
+            <td>
+                <a class="btn" th:href="@{'/web/carros/editar/' + ${carro.id}}">Editar</a>
+                <a class="btn" th:href="@{'/web/carros/deletar/' + ${carro.id}}"
+                   onclick="return confirm('Deseja realmente excluir este carro?');">Excluir</a>
+                <a class="btn" th:href="@{'/web/carros/detalhe/' + ${carro.id}}">Detalhar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
